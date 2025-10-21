@@ -2,7 +2,9 @@ package com.zebra.criticalpermissionshelpersample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zebra.criticalpermissionshelper.CriticalPermissionsHelper;
 import com.zebra.criticalpermissionshelper.EPermissionType;
@@ -195,6 +198,14 @@ public class MainActivity extends AppCompatActivity {
                                  aSwitch.setChecked(true);
                              }
                          });
+
+                         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                                 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
+                             Toast.makeText(MainActivity.this, "SUCCESS", Toast.LENGTH_LONG).show();
+                         } else {
+                             Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_LONG).show();
+                         }
                      }
 
                      @Override
